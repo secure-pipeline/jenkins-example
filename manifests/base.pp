@@ -32,4 +32,11 @@ node 'jenkins' inherits 'base' {
     ensure   => installed,
     provider => gem,
   }
+
+  # This should be removed soon, first install of brakeman triggered
+  # a bug with the latest release of sass
+  package { 'sass':
+    ensure   => '3.2.15',
+    provider => gem,
+  }
 }
