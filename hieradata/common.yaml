@@ -1,0 +1,19 @@
+---
+classes:
+  - apt
+  - locales
+  - ssh
+  - motd
+  - sudo
+  - ufw
+  - timezone
+  - ntp
+  - unattended_upgrades
+  - ruby
+  - ruby::dev
+  - git
+timezone::timezone: 'UTC'
+ntp::ensure: latest
+unattended_upgrades::autoremove: true
+ruby::gems_version: absent
+ruby:rubygems_update: false

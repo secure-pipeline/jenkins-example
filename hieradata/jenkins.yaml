@@ -1,0 +1,5 @@
+---
+classes:
+  - jenkins
+  - clamav
+jenkins::version: latest
