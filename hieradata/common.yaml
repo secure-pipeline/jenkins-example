@@ -16,4 +16,4 @@ timezone::timezone: 'UTC'
 ntp::ensure: latest
 unattended_upgrades::autoremove: true
 ruby::gems_version: absent
-ruby:rubygems_update: false
+ruby::rubygems_update: false
