@@ -34,4 +34,5 @@ vagrant up
 
 ## Todo
 
-* Mechanism for sharing Jenkins configuration
+* Mechanism for sharing Jenkins configuration. Looking at
+  [Jenkins Job Builder](http://ci.openstack.org/jjb.html)
