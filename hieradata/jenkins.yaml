@@ -2,6 +2,7 @@
 classes:
   - jenkins
   - clamav
+  - jenkins_job_builder
 jenkins::version: latest
 jenkins::plugin_hash:
   'git': {}
