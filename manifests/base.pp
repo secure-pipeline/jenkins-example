@@ -28,12 +28,6 @@ node 'jenkins' inherits 'base' {
     ip   => $::ipaddress_eth1
   }
 
-  jenkins::plugin {'cucumber-reports':}
-  jenkins::plugin {'build-pipeline-plugin':}
-  jenkins::plugin {'clamav':}
-  jenkins::plugin {'git-client':}
-  jenkins::plugin {'greenballs':}
-
   package { 'brakeman':
     ensure   => installed,
     provider => gem,

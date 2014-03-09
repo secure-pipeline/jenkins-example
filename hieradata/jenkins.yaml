@@ -3,3 +3,9 @@ classes:
   - jenkins
   - clamav
 jenkins::version: latest
+jenkins::plugin_hash:
+  'git': {}
+  'cucumber-reports': {}
+  'clamav': {}
+  'git-client': {}
+  'greenballs': {}
