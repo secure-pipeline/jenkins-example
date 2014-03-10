@@ -8,6 +8,7 @@ class jenkins_job_builder (
   $url = '',
   $username = '',
   $password = '',
+  $config_source = undef,
 ) {
 
   ensure_packages(['python-pip', 'python-yaml', 'python-jenkins'])
@@ -48,4 +49,19 @@ class jenkins_job_builder (
     content => template('jenkins_job_builder/jenkins_jobs.ini.erb'),
     require => File['/etc/jenkins_jobs'],
   }
+
+  if $config_source {
+    file { '/etc/jenkins_jobs/config':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      purge   => true,
+      force   => true,
+      source  => $config_source,
+      notify  => Exec['jenkins_jobs_update'],
+    }
+  }
+
 }

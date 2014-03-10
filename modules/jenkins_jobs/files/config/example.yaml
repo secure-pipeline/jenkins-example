@@ -1,0 +1,10 @@
+- job-template:
+    name: '{name}-example'
+
+    builders:
+      - test 
+
+- job-group:
+    name: example-jobs
+    jobs:
+      - '{name}-example'

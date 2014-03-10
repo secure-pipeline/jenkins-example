@@ -10,3 +10,5 @@ jenkins::plugin_hash:
   'clamav': {}
   'git-client': {}
   'greenballs': {}
+jenkins_job_builder::url: 'http://localhost:8080/'
+jenkins_job_builder::config_source: 'puppet:///modules/jenkins_jobs/config'

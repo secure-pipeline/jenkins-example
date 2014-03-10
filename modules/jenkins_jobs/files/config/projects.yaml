@@ -1,0 +1,14 @@
+- project:
+    name: example1
+    jobs:
+      - example-jobs
+
+- project:
+    name: example2
+    jobs:
+      - example-jobs
+
+- project:
+    name: example3
+    jobs:
+      - example-jobs
