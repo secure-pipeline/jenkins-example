@@ -2,36 +2,42 @@ FORGE
   remote: http://forge.puppetlabs.com
   specs:
     andschwa/unattended_upgrades (0.1.2)
-    attachmentgenie/ufw (1.4.7)
+    attachmentgenie/ufw (1.4.8)
       puppetlabs/stdlib (>= 2.2.1)
     darin/zypprepo (1.0.1)
-    maestrodev/wget (1.3.1)
+    maestrodev/wget (1.4.1)
     mjhas/clamav (0.0.1)
-    puppetlabs/apt (1.4.0)
+    puppetlabs/apt (1.4.2)
       puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/gcc (0.1.0)
     puppetlabs/git (0.0.3)
-    puppetlabs/java (1.1.0)
-      puppetlabs/stdlib (>= 0.1.6)
-    puppetlabs/ntp (3.0.1)
+    puppetlabs/ntp (3.0.3)
       puppetlabs/stdlib (>= 0.1.6)
     puppetlabs/ruby (0.1.0)
     puppetlabs/stdlib (4.1.0)
     puppetlabs/vcsrepo (0.2.0)
-    rtyler/jenkins (1.0.0)
+    rtyler/jenkins (1.1.0)
       darin/zypprepo (>= 1.0.1)
       puppetlabs/apt (>= 0.0.3)
       puppetlabs/java (>= 1.0.1)
       puppetlabs/stdlib (>= 2.0.0)
     saz/limits (2.0.2)
-    saz/locales (2.0.0)
+    saz/locales (2.1.0)
     saz/motd (2.1.0)
-    saz/ssh (1.4.0)
+    saz/ssh (2.3.6)
       puppetlabs/stdlib (>= 2.2.1)
-    saz/sudo (3.0.0)
+    saz/sudo (3.0.6)
       puppetlabs/stdlib (>= 2.3.0)
-    saz/timezone (2.0.0)
-    smarchive/archive (0.1.1)
+    saz/timezone (3.0.1)
+      puppetlabs/stdlib (>= 2.3.0)
+
+GIT
+  remote: git://github.com/puppetlabs/puppetlabs-java.git
+  ref: master
+  sha: b31311c52ffb0dc59e0f8854aa0be7a5fd34ba45
+  specs:
+    puppetlabs/java (1.1.0)
+      puppetlabs/stdlib (>= 0.1.6)
 
 DEPENDENCIES
   andschwa/unattended_upgrades (>= 0)
@@ -41,6 +47,7 @@ DEPENDENCIES
   puppetlabs/apt (>= 0)
   puppetlabs/gcc (>= 0)
   puppetlabs/git (>= 0)
+  puppetlabs/java (>= 0)
   puppetlabs/ntp (>= 0)
   puppetlabs/ruby (>= 0)
   puppetlabs/vcsrepo (>= 0)
@@ -51,5 +58,4 @@ DEPENDENCIES
   saz/ssh (>= 0)
   saz/sudo (>= 0)
   saz/timezone (>= 0)
-  smarchive/archive (>= 0)
 

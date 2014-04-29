@@ -1,11 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.require_plugin "vagrant-serverspec"
-Vagrant.require_plugin "vagrant-hostsupdater"
-Vagrant.require_plugin "vagrant-hosts"
-Vagrant.require_plugin "vagrant-cucumber-host"
-
 nodes = {
   'jenkins' => {:ip => '192.168.90.30', :memory => 1024},
   'test' => {:ip => '192.168.90.31'},
@@ -15,8 +10,7 @@ node_defaults = {
 }
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'canonical-ubuntu-13.10'
-  config.vm.box_url = 'http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box'
+  config.vm.box = 'ubuntu/trusty64'
   config.vm.provision :shell, :path => 'scripts/puppet.sh'
   config.vm.provision :puppet do |puppet|
     puppet.options        = '--debug --verbose --summarize --reports store --hiera_config=/vagrant/hiera.yaml'
