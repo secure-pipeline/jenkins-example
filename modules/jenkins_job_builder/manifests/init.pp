@@ -14,7 +14,7 @@ class jenkins_job_builder (
   ensure_packages(['python-pip', 'python-yaml', 'python-jenkins'])
 
   vcsrepo { '/opt/jenkins_job_builder':
-    ensure   => latest,
+    ensure   => present,
     provider => git,
     revision => 'master',
     source   => 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
@@ -35,7 +35,6 @@ class jenkins_job_builder (
   exec { 'jenkins_jobs_update':
     command     => 'jenkins-jobs update --delete-old /etc/jenkins_jobs/config',
     path        => '/bin:/usr/bin:/usr/local/bin',
-    refreshonly => true,
     require     => [
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
       Package['python-jenkins'],
