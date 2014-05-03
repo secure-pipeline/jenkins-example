@@ -28,9 +28,16 @@ node 'jenkins' inherits 'base' {
     ip   => $::ipaddress_eth1
   }
 
+  ensure_packages([
+    'libxslt-dev',
+    'libxml2-dev',
+    'phantomjs',
+  ])
+
   package { [
     'brakeman',
-    'bundler-audit'
+    'bundler-audit',
+    'ci_reporter',
   ]:
     ensure   => installed,
     provider => gem,
