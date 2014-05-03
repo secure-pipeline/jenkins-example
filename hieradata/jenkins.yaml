@@ -10,5 +10,11 @@ jenkins::plugin_hash:
   'clamav': {}
   'git-client': {}
   'greenballs': {}
+  'build-flow-plugin': {}
+  'metadata': {}
+  'brakeman': {}
+  'batch-task': {}
+  'blame-upstream-commiters': {}
+  'clone-workspace-scm': {}
 jenkins_job_builder::url: 'http://localhost:8080/'
 jenkins_job_builder::config_source: 'puppet:///modules/jenkins_jobs/config'
