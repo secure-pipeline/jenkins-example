@@ -1,4 +1,0 @@
-- builder:
-    name: test
-    builders:
-      - shell: "run.sh"

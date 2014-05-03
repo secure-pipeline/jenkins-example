@@ -1,7 +1,5 @@
 - defaults:
     name: global
-    description: |
-      This job is managed by puppet and will be overwritten.
     project-type: freestyle
     concurrent: true
 
@@ -16,3 +14,6 @@
       numToKeep: -1
       artifactDaysToKeep: -1
       artifactNumToKeep: -1
+
+    publishers:
+      - blame-upstream

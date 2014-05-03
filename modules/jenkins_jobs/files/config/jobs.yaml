@@ -1,0 +1,87 @@
+- job:
+    name: download-and-test
+    display-name: 'Download and unit test'
+    metadata:
+      - string:
+          name: FOO
+          value: bar
+          expose-to-env: true
+    builders:
+      - shell: echo "$FOO"
+
+    parameters:
+      - string:
+          name: FOO
+          default: bar
+          description: "A parameter named FOO, defaults to 'bar'."
+
+    scm:
+      - git:
+          url: https://github.com/OWASP/railsgoat.git
+          branches:
+            - master
+
+    properties:
+      - batch-tasks:
+          - name: say hello
+            script: echo "Hello world"
+
+    publishers:
+      - clone-workspace
+
+- job:
+    name: static-analysis
+    display-name: 'Brakeman static analysis scan'
+    builders:
+      - shell: "brakeman -o brakeman-output.tabs --no-progress --separate-models"
+
+    scm:
+      - workspace:
+          parent-job: download-and-test
+
+    publishers:
+      - brakeman:
+          output: brakeman-output.tabs
+
+- job:
+    name: virus-scan
+    project-type: matrix
+    display-name: 'Virus scanning'
+    axes:
+      - axis:
+          type: user-defined
+          name: database
+          values:
+            - mysql
+            - postgresql
+            - sqlite
+    builders:
+      - shell: echo "$database"
+
+    scm:
+      - workspace:
+          parent-job: download-and-test
+
+
+- job:
+    name: bundler-audit
+    display-name: 'Check known vulnerabilities in dependencies'
+    builders:
+      - shell: bundle-audit
+
+    scm:
+      - workspace:
+          parent-job: download-and-test
+
+- job:
+    name: start
+    project-type: flow
+    block-downstream: true
+    dsl: |
+      build("download-and-test")
+      parallel (
+        { build("static-analysis") },
+        { build("virus-scan") },
+        { build("bundler-audit") }
+      )
+
