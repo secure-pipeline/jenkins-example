@@ -28,9 +28,30 @@ node 'jenkins' inherits 'base' {
     ip   => $::ipaddress_eth1
   }
 
-  package { 'brakeman':
+  package { [
+    'brakeman',
+    'bundler-audit'
+  ]:
     ensure   => installed,
     provider => gem,
+  }
+
+  package { [
+    'jenkins-job-builder-brakeman',
+    'jenkins-job-builder-clamav'
+  ]:
+    ensure   => installed,
+    provider => pip,
+  }
+
+  file_line { 'Enable ClamAV TCP':
+    line => 'TCPSocket 3310',
+    path => '/etc/clamav/clamd.conf',
+  }
+
+  file_line { 'Lockdown ClamAV TCP port':
+    line => 'TCPAddr 127.0.0.1',
+    path => '/etc/clamav/clamd.conf',
   }
 
   # This should be removed soon, first install of brakeman triggered
