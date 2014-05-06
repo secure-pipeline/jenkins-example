@@ -31,6 +31,9 @@ node 'jenkins' inherits 'base' {
   ensure_packages([
     'libxslt-dev',
     'libxml2-dev',
+    'sqlite3',
+    'libsqlite3-dev',
+    'libmysqld-dev',
     'phantomjs',
   ])
 

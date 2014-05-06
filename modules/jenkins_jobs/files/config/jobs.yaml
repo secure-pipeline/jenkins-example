@@ -7,7 +7,11 @@
           value: bar
           expose-to-env: true
     builders:
-      - shell: echo "$FOO"
+      - shell: |
+          export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+          bundle install --path vendor
+          rake db:setup
+          rake spec
 
     parameters:
       - string:
