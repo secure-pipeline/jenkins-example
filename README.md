@@ -9,10 +9,10 @@ manage the virtual machines on which we're installing the tools.
 Once you have Vagrant installed you'll need a few plugins.
 
 ```bash
-vagrant pligin install vagrant-serverspec
-vagrant pligin install vagrant-hosts
-vagrant pligin install vagrant-hostsupdater
-vagrant pligin install vagrant-cucumber-host
+vagrant plugin install vagrant-serverspec
+vagrant plugin install vagrant-hosts
+vagrant plugin install vagrant-hostsupdater
+vagrant plugin install vagrant-cucumber-host
 ```
 
 Next, lets download the required development dependencies and puppet modules
