@@ -16,5 +16,9 @@ jenkins::plugin_hash:
   'batch-task': {}
   'blame-upstream-commiters': {}
   'clone-workspace-scm': {}
-jenkins_job_builder::url: 'http://localhost:8080/'
+jenkins_job_builder::url: 'http://localhost:9090/'
 jenkins_job_builder::config_source: 'puppet:///modules/jenkins_jobs/config'
+jenkins::config_hash:
+  HTTP_PORT:
+    value: 9090
+

@@ -1,23 +1,12 @@
 - job:
     name: download-and-test
     display-name: 'Download and unit test'
-    metadata:
-      - string:
-          name: FOO
-          value: bar
-          expose-to-env: true
     builders:
       - shell: |
           export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
           bundle install --path ../cache/vendor
-          rake db:setup
-          rake test
-
-    parameters:
-      - string:
-          name: FOO
-          default: bar
-          description: "A parameter named FOO, defaults to 'bar'."
+          bundle exec rake db:setup
+          bundle exec rake test
 
     scm:
       - git:
@@ -27,8 +16,8 @@
 
     properties:
       - batch-tasks:
-          - name: say hello
-            script: echo "Hello world"
+          - name: Clear bundler cache
+            script: rm -fr ../cache/vendor
 
     publishers:
       - clone-workspace
@@ -49,16 +38,8 @@
 
 - job:
     name: virus-scan
-    project-type: matrix
     display-name: 'Virus scanning'
-    axes:
-      - axis:
-          type: user-defined
-          name: database
-          values:
-            - mysql
-            - postgresql
-            - sqlite
+
     builders:
       - shell: echo "$database"
 
@@ -66,12 +47,34 @@
       - workspace:
           parent-job: download-and-test
 
+    publishers:
+      - clamav:
+          includes: "**"
+
 
 - job:
     name: bundler-audit
     display-name: 'Check known vulnerabilities in dependencies'
     builders:
       - shell: bundle-audit
+
+    scm:
+      - workspace:
+          parent-job: download-and-test
+
+- job:
+    name: zapr
+    display-name: 'Scan with OWASP ZAP'
+
+    builders:
+      - shell: |
+          #/bin/bash
+          export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+          bundle install --path ../cache/vendor
+          bundle exec rake db:setup
+          bundle exec rails server -d
+          zapr --summary --debug --zap-path /opt/zap/zap.sh http://localhost:3000/
+          kill $(ps aux | grep '[r]ails server' | awk '{print $2}')
 
     scm:
       - workspace:
@@ -86,6 +89,9 @@
       parallel (
         { build("static-analysis") },
         { build("virus-scan") },
-        { build("bundler-audit") }
+        { ignore(FAILURE) {
+            build("bundler-audit")
+        }}
       )
+      build("zapr")
 

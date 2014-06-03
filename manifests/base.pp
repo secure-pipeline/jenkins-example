@@ -24,7 +24,7 @@ node 'base' {
 node 'jenkins' inherits 'base' {
 
   ufw::allow { 'allow-jenkins-from-all':
-    port => 8080,
+    port => 9090,
     ip   => $::ipaddress_eth1
   }
 
@@ -41,6 +41,7 @@ node 'jenkins' inherits 'base' {
     'brakeman',
     'bundler-audit',
     'ci_reporter',
+    'zapr',
   ]:
     ensure   => installed,
     provider => gem,
@@ -62,6 +63,23 @@ node 'jenkins' inherits 'base' {
   file_line { 'Lockdown ClamAV TCP port':
     line => 'TCPAddr 127.0.0.1',
     path => '/etc/clamav/clamd.conf',
+  }
+
+  file { '/opt/src':
+    ensure => directory,
+  }
+
+  wget::fetch { 'download owasp zap':
+    source      => 'http://sourceforge.net/projects/zaproxy/files/2.3.1/ZAP_2.3.1_Linux.tar.gz/download',
+    destination => '/opt/src/zap.tar.gz',
+    require     => File['/opt/src'],
+    before      => Exec['untar and move owasp zap'],
+  }
+
+  exec { 'untar and move owasp zap':
+    command  => '/bin/tar -xvf zap.tar.gz; mv ZAP* /opt/zap',
+    cwd      => '/opt/src',
+    creates  => '/opt/zap',
   }
 
   # This should be removed soon, first install of brakeman triggered
