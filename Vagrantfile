@@ -3,7 +3,6 @@
 
 nodes = {
   'jenkins' => {:ip => '192.168.90.30', :memory => 1024},
-  'test' => {:ip => '192.168.90.31'},
 }
 node_defaults = {
   :memory => 256,
