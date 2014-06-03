@@ -9,9 +9,9 @@
     builders:
       - shell: |
           export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-          bundle install --path vendor
+          bundle install --path ../cache/vendor
           rake db:setup
-          rake spec
+          rake test
 
     parameters:
       - string:
