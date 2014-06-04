@@ -11,7 +11,7 @@ class jenkins_job_builder (
   $config_source = undef,
 ) {
 
-  ensure_packages(['python-pip', 'python-yaml', 'python-jenkins'])
+  ensure_packages(['python-yaml', 'python-jenkins'])
 
   vcsrepo { '/opt/jenkins_job_builder':
     ensure   => present,

@@ -7,7 +7,7 @@ end='\e[0m'
 
 # Ruby on Ubuntu is broken by design :(
 echo -e "----> ${green}Installing ruby${end}"
-sudo apt-get install ruby2.0 ruby2.0-dev
+sudo apt-get install ruby2.0 ruby2.0-dev -y
 for i in erb gem irb rake rdoc ri ruby testrb
 do
   sudo ln -sf /usr/bin/${i}2.0 /usr/bin/${i}

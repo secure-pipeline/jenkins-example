@@ -27,8 +27,8 @@ Vagrant.configure('2') do |config|
       node_opts         = node_defaults.merge(node_opts)
       node.vm.hostname  = node_name
       node.vm.network   :private_network, ip: node_opts[:ip]
-      node.vm.provision :hosts
-      node.vm.provision :cucumber if node_name == 'jenkins'
+      #node.vm.provision :hosts
+      node.vm.provision :cucumber
 
       node.vm.provider :virtualbox do |vb|
         vb.memory = node_opts[:memory]

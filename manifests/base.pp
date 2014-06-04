@@ -28,6 +28,9 @@ node 'jenkins' inherits 'base' {
     ip   => $::ipaddress_eth1
   }
 
+  # before -> after
+  Class['jenkins'] -> Class['jenkins_job_builder']
+
   ensure_packages([
     'libxslt-dev',
     'libxml2-dev',
@@ -36,6 +39,10 @@ node 'jenkins' inherits 'base' {
     'libmysqld-dev',
     'phantomjs',
   ])
+
+  package { 'python-pip':
+    ensure => installed,
+  }
 
   package { [
     'brakeman',
@@ -53,16 +60,20 @@ node 'jenkins' inherits 'base' {
   ]:
     ensure   => installed,
     provider => pip,
+    before   => Class['jenkins_job_builder'],
+    require  => Package['python-pip'],
   }
 
   file_line { 'Enable ClamAV TCP':
-    line => 'TCPSocket 3310',
-    path => '/etc/clamav/clamd.conf',
+    line    => 'TCPSocket 3310',
+    path    => '/etc/clamav/clamd.conf',
+    require => Class['clamav'],
   }
 
   file_line { 'Lockdown ClamAV TCP port':
-    line => 'TCPAddr 127.0.0.1',
-    path => '/etc/clamav/clamd.conf',
+    line    => 'TCPAddr 127.0.0.1',
+    path    => '/etc/clamav/clamd.conf',
+    require => Class['clamav'],
   }
 
   file { '/opt/src':

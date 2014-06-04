@@ -11,7 +11,6 @@ Once you have Vagrant installed you'll need a few plugins.
 ```bash
 vagrant plugin install vagrant-serverspec
 vagrant plugin install vagrant-hosts
-vagrant plugin install vagrant-hostsupdater
 vagrant plugin install vagrant-cucumber-host
 ```
 
