@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 nodes = {
-  'jenkins' => {:ip => '192.168.90.30', :memory => 2048},
+  'jenkins' => {:ip => '192.168.90.30', :memory => 1536},
 }
 node_defaults = {
   :memory => 256,

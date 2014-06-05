@@ -36,6 +36,7 @@ class jenkins_job_builder (
     command     => 'jenkins-jobs update --delete-old /etc/jenkins_jobs/config',
     path        => '/bin:/usr/bin:/usr/local/bin',
     require     => [
+      Exec['install_jenkins_job_builder'],
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
       Package['python-jenkins'],
       Package['python-yaml'],
