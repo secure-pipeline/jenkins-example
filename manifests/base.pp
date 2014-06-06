@@ -64,16 +64,38 @@ node 'jenkins' inherits 'base' {
     require  => Package['python-pip'],
   }
 
+  $clamav_config = "<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.clamav.ClamAvRecorder_-DescriptorImpl plugin=\"clamav@0.2.1\">
+  <host>localhost</host>
+  <port>3310</port>
+  <timeout>10000</timeout>
+  <scanArchivedArtifacts>false</scanArchivedArtifacts>
+</org.jenkinsci.plugins.clamav.ClamAvRecorder_-DescriptorImpl>"
+
+  file { '/var/lib/jenkins/org.jenkinsci.plugins.clamav.ClamAvRecorder.xml':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    content => $clamav_config,
+  }
+
   file_line { 'Enable ClamAV TCP':
     line    => 'TCPSocket 3310',
     path    => '/etc/clamav/clamd.conf',
     require => Class['clamav'],
+    notify  => Exec['restart-clamav'],
   }
 
   file_line { 'Lockdown ClamAV TCP port':
     line    => 'TCPAddr 127.0.0.1',
     path    => '/etc/clamav/clamd.conf',
     require => Class['clamav'],
+    notify  => Exec['restart-clamav'],
+  }
+
+  exec { 'restart-clamav':
+    command     => 'service clamav-daemon restart',
+    refreshonly => true,
   }
 
   file { '/opt/src':
