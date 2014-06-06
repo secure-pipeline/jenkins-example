@@ -83,14 +83,20 @@ node 'jenkins' inherits 'base' {
     line    => 'TCPSocket 3310',
     path    => '/etc/clamav/clamd.conf',
     require => Class['clamav'],
-    notify  => Exec['restart-clamav'],
+    notify  => Exec['refresh-clamav'],
   }
 
   file_line { 'Lockdown ClamAV TCP port':
     line    => 'TCPAddr 127.0.0.1',
     path    => '/etc/clamav/clamd.conf',
     require => Class['clamav'],
-    notify  => Exec['restart-clamav'],
+    notify  => Exec['refresh-clamav'],
+  }
+
+  exec { 'refresh-clamav':
+    command     => 'freshclam',
+    refreshonly => true,
+    notify      => Exec['restart-clamav'],
   }
 
   exec { 'restart-clamav':
