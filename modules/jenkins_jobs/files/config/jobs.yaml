@@ -40,9 +40,6 @@
     name: virus-scan
     display-name: 'Virus scanning'
 
-    builders:
-      - shell: echo "$database"
-
     scm:
       - workspace:
           parent-job: download-and-test
