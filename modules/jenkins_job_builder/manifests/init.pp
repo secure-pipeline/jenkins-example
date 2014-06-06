@@ -33,8 +33,10 @@ class jenkins_job_builder (
   }
 
   exec { 'jenkins_jobs_update':
-    command     => 'jenkins-jobs update --delete-old /etc/jenkins_jobs/config',
-    path        => '/bin:/usr/bin:/usr/local/bin',
+    command   => 'jenkins-jobs update --delete-old /etc/jenkins_jobs/config',
+    path      => '/bin:/usr/bin:/usr/local/bin',
+    tries     => 5,
+    try_sleep => 20,
     require     => [
       Exec['install_jenkins_job_builder'],
       File['/etc/jenkins_jobs/jenkins_jobs.ini'],
