@@ -22,7 +22,7 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.provision :serverspec do |spec|
-    spec.pattern = 'spec/*_spec.rb'
+    spec.pattern = 'tests/spec/*_spec.rb'
   end
 
   nodes.each_with_index do |(node_name, node_opts), i|
