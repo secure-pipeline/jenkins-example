@@ -1,0 +1,30 @@
+{
+  "builders": [{
+    "type": "digitalocean",
+    "image": "ubuntu-14-04-x64",
+    "region": "ams1",
+    "size": "1GB",
+    "snapshot_name": "secure-pipeline-{{timestamp}}",
+    "droplet_name": "jenkins.local"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "script": "scripts/puppet.sh"
+  }, {
+    "type": "file",
+    "source": "hieradata",
+    "destination": "/tmp"
+  }, {
+    "type": "puppet-masterless",
+    "manifest_file": "manifests/base.pp",
+    "hiera_config_path": "hiera_packer.yaml",
+    "module_paths": ["modules", "vendor/modules"]
+  }, {
+    "type": "file",
+    "source": "tests",
+    "destination": "/tmp"
+  }, {
+    "type": "shell",
+    "script": "scripts/serverspec.sh"
+  }]
+}
