@@ -25,12 +25,10 @@ node 'jenkins' inherits 'base' {
 
   ufw::allow { 'allow-jenkins-proxy-from-all':
     port => 80,
-    ip   => $::ipaddress_eth1
   }
 
   ufw::allow { 'allow-jenkins-from-all':
     port => 9090,
-    ip   => $::ipaddress_eth1
   }
 
   # before -> after
