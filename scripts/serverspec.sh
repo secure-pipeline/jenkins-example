@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo gem install bundler --no-ri --no-rdoc
+gem install bundler --no-ri --no-rdoc
 cd /tmp/tests
 bundle install --path=vendor
-bundle exec rake spec
+SERVERSPEC_LOCAL=true bundle exec rake spec
