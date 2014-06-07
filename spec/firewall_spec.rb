@@ -9,6 +9,13 @@ describe service('ufw') do
   it { should be_running }
 end
 
-describe port(22) do
-  it { should be_listening }
+[22, 9090, 3310].each do |value|
+  describe port(value) do
+    it { should be_listening }
+  end
+end
+
+describe host('example.com') do
+  it { should be_resolvable }
+  it { should be_reachable }
 end
