@@ -3,6 +3,7 @@ classes:
   - jenkins
   - clamav
   - jenkins_job_builder
+  - nginx
 jenkins::version: latest
 jenkins::plugin_hash:
   'cucumber-reports': {}
@@ -22,4 +23,12 @@ jenkins_job_builder::config_source: 'puppet:///modules/jenkins_jobs/config'
 jenkins::config_hash:
   HTTP_PORT:
     value: 9090
-
+nginx::nginx_upstreams:
+  'jenkins':
+    ensure: present
+    members:
+      - localhost:9090
+nginx::nginx_vhosts:
+  'default':
+    proxy: 'http://jenkins'
+    listen_options: 'default_server'

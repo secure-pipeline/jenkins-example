@@ -9,7 +9,7 @@ describe service('ufw') do
   it { should be_running }
 end
 
-[22, 9090, 3310].each do |value|
+[80, 22, 9090, 3310].each do |value|
   describe port(value) do
     it { should be_listening }
   end

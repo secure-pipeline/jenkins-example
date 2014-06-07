@@ -8,8 +8,6 @@ mod 'puppetlabs/vcsrepo'
 mod 'puppetlabs/ruby'
 mod 'puppetlabs/java', :git => 'git://github.com/puppetlabs/puppetlabs-java.git'
 
-
-
 mod 'saz/locales'
 mod 'saz/sudo'
 mod 'saz/limits'
@@ -26,3 +24,5 @@ mod 'andschwa/unattended_upgrades'
 mod 'rtyler/jenkins'
 
 mod 'mjhas/clamav'
+
+mod 'jfryman/nginx'
