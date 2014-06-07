@@ -28,6 +28,11 @@ node 'jenkins' inherits 'base' {
     ip   => $::ipaddress_eth1
   }
 
+  ufw::allow { 'allow-jenkins-from-all':
+    port => 9090,
+    ip   => $::ipaddress_eth1
+  }
+
   # before -> after
   Class['jenkins'] -> Class['jenkins_job_builder']
 
@@ -95,6 +100,7 @@ node 'jenkins' inherits 'base' {
 
   exec { 'refresh-clamav':
     command     => 'freshclam',
+    timeout     => 0,
     refreshonly => true,
     notify      => Exec['restart-clamav'],
   }
