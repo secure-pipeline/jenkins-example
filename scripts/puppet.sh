@@ -19,7 +19,7 @@ if which /usr/local/bin/puppet > /dev/null 2>&1; then
   exit 0
 fi
 
-# Install language locale as without can 
+# Install language locale as without can
 # interfere with package installation
 sudo apt-get install language-pack-en -y
 
