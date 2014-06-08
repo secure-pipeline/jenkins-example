@@ -14,6 +14,10 @@ which:
   [Brakeman](http://brakemanscanner.org/) security scanner
 * Spider and report issues found via [OWASP
   ZAP](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project)
+* Generate some code metrics using
+  [Sloccount](http://www.dwheeler.com/sloccount/)
+* Run the [Capybara](http://jnicklas.github.io/capybara/) integration
+  tests
 
 We use the RailsGoat application as an example, for your own work you
 could swap this out for your own applications.
