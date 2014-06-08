@@ -1,5 +1,4 @@
 require 'serverspec'
-require 'rspec/its'
 
 include SpecInfra::Helper::DetectOS
 
