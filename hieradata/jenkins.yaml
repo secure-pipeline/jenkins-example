@@ -18,6 +18,9 @@ jenkins::plugin_hash:
   'clone-workspace-scm': {}
   'scm-api': {}
   'git': {}
+  'test-stability': {}
+  'buildgraph-view': {}
+  'sloccount': {}
 jenkins_job_builder::url: 'http://localhost:9090/'
 jenkins_job_builder::config_source: 'puppet:///modules/jenkins_jobs/config'
 jenkins::config_hash:

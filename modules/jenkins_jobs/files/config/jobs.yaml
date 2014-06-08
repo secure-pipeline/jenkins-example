@@ -23,8 +23,46 @@
       - clone-workspace
 
 - job:
+    name: integration-test
+    display-name: 'Run integration tests'
+
+    builders:
+      - shell: |
+          export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+          gemrat ci_reporter
+          bundle install --path ../cache/vendor
+          bundle exec rake db:setup
+          bundle exec rake -f /var/lib/jenkins/jobs/download-and-test/cache/vendor/ruby/2.0.0/gems/ci_reporter-1.9.2/stub.rake ci:setup:rspecdoc spec
+
+    scm:
+      - workspace:
+          parent-job: download-and-test
+
+    publishers:
+      - blame-upstream
+      - junit:
+          results: spec/reports/*.xml
+          test-stability: true
+
+- job:
+    name: code-metrics
+    display-name: 'Code metrics'
+    builders:
+      - shell: "sloccount --duplicates --wide --details . > sloccount.sc"
+
+    scm:
+      - workspace:
+          parent-job: download-and-test
+
+    publishers:
+      - sloccount:
+          report-files: sloccount.sc
+          charset: UTF-8
+      - blame-upstream
+
+- job:
     name: static-analysis
-    display-name: 'Brakeman static analysis scan'
+    display-name: 'Static analysis'
     builders:
       - shell: "brakeman -o brakeman-output.tabs --no-progress --separate-models"
 
@@ -35,7 +73,6 @@
     publishers:
       - brakeman:
           output: brakeman-output.tabs
-
 - job:
     name: virus-scan
     display-name: 'Virus scanning'
@@ -47,11 +84,12 @@
     publishers:
       - clamav:
           includes: "**"
-
+      - blame-upstream
 
 - job:
     name: bundler-audit
     display-name: 'Check known vulnerabilities in dependencies'
+
     builders:
       - shell: bundle-audit
 
@@ -59,9 +97,12 @@
       - workspace:
           parent-job: download-and-test
 
+    publishers:
+      - blame-upstream
+
 - job:
     name: zapr
-    display-name: 'Scan with OWASP ZAP'
+    display-name: 'Active vulnerability scan'
 
     builders:
       - shell: |
@@ -77,6 +118,9 @@
       - workspace:
           parent-job: download-and-test
 
+    publishers:
+      - blame-upstream
+
 - job:
     name: start
     project-type: flow
@@ -84,11 +128,17 @@
     dsl: |
       build("download-and-test")
       parallel (
+        { build("zapr") },
         { build("static-analysis") },
+        { build("code-metrics") },
         { build("virus-scan") },
         { ignore(FAILURE) {
             build("bundler-audit")
         }}
       )
-      build("zapr")
+      ignore(FAILURE) {
+        build("integration-test")
+      }
+    publishers:
+      - aggregate-tests
 

@@ -44,6 +44,7 @@ node 'jenkins' inherits 'base' {
     'libsqlite3-dev',
     'libmysqld-dev',
     'phantomjs',
+    'sloccount',
   ])
 
   package { 'python-pip':
@@ -53,7 +54,7 @@ node 'jenkins' inherits 'base' {
   package { [
     'brakeman',
     'bundler-audit',
-    'ci_reporter',
+    'gemrat',
     'zapr',
   ]:
     ensure   => installed,
