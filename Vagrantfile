@@ -21,6 +21,8 @@ Vagrant.configure('2') do |config|
     puppet.manifest_file  = 'base.pp'
   end
 
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+
   config.vm.provision :serverspec do |spec|
     spec.pattern = 'tests/spec/*_spec.rb'
   end
@@ -31,7 +33,6 @@ Vagrant.configure('2') do |config|
       node.vm.hostname  = node_name
 
       config.vm.provider :digital_ocean do |provider, override|
-        override.ssh.private_key_path = '~/.ssh/id_rsa'
         override.vm.box = 'digital_ocean'
         override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
