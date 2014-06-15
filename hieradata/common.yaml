@@ -17,3 +17,15 @@ ntp::ensure: latest
 unattended_upgrades::autoremove: true
 ruby::gems_version: absent
 ruby::rubygems_update: false
+users_base:
+  garethr:
+    ensure: present
+    uid: 10001
+    comment: Gareth Rushgrove
+    groups:
+      - sudo
+    managehome: true
+    ssh_authorized_keys:
+      mykey:
+        type: 'ssh-rsa'
+        key:  'AAAAB3NzaC1yc2EAAAADAQABAAABAQCqk58h5ERJ9Mg8DOOsOiggAh9dEvWOf5/7MbrDPv4NROJ/XnctLzKHC2pInHS/IrC5dzGsyLDpEpTBxx4lYLse0LNXNEqDJICsTKdOdL6wAucN6P+OGZdoa7HWzygH1aPTW2B026iRb6EmlOC3Duqk5tRZ3HDqxWoK5MauVChmZbCIL1LKKdKgaKrhpUUWMAUB+xSBAfy9xCDrEDso1mJE06ABXQuw0xFE+lP2j7qXl++/P6I0rNX9PpWpFzh4WISRcCu+g+q7+ggoktg9/l4TN7ZNYITA6OCnU6urcphMHVlphOAi+m/Vrd54pOBi+QXXG+hgkPIY5TCIgLhOANiD'

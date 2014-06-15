@@ -1,4 +1,4 @@
-forge "http://forge.puppetlabs.com"
+forge "https://forge.puppetlabs.com"
 
 mod 'puppetlabs/apt'
 mod 'puppetlabs/ntp'
@@ -26,3 +26,5 @@ mod 'rtyler/jenkins'
 mod 'mjhas/clamav'
 
 mod 'jfryman/nginx'
+
+mod 'mthibaut/users'

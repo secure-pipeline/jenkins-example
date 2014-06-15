@@ -1,6 +1,11 @@
 FORGE
   remote: http://forge.puppetlabs.com
   specs:
+    puppetlabs/stdlib (4.1.0)
+
+FORGE
+  remote: https://forge.puppetlabs.com
+  specs:
     andschwa/unattended_upgrades (0.1.2)
     attachmentgenie/ufw (1.4.8)
       puppetlabs/stdlib (>= 2.2.1)
@@ -9,19 +14,20 @@ FORGE
       puppetlabs/apt (>= 1.0.0)
       puppetlabs/concat (>= 1.0.0)
       puppetlabs/stdlib (>= 0.1.6)
-    maestrodev/wget (1.4.1)
+    maestrodev/wget (1.4.3)
     mjhas/clamav (0.0.1)
-    puppetlabs/apt (1.4.2)
+    mthibaut/users (1.0.11)
+      puppetlabs/stdlib (>= 0.0.0)
+    puppetlabs/apt (1.5.0)
       puppetlabs/stdlib (>= 2.2.1)
     puppetlabs/concat (1.1.0)
       puppetlabs/stdlib (>= 4.0.0)
     puppetlabs/gcc (0.1.0)
     puppetlabs/git (0.0.3)
-    puppetlabs/ntp (3.0.3)
-      puppetlabs/stdlib (>= 0.1.6)
+    puppetlabs/ntp (3.1.1)
+      puppetlabs/stdlib (>= 4.0.0)
     puppetlabs/ruby (0.1.0)
-    puppetlabs/stdlib (4.1.0)
-    puppetlabs/vcsrepo (0.2.0)
+    puppetlabs/vcsrepo (1.0.0)
     rtyler/jenkins (1.1.0)
       darin/zypprepo (>= 1.0.1)
       puppetlabs/apt (>= 0.0.3)
@@ -51,6 +57,7 @@ DEPENDENCIES
   jfryman/nginx (>= 0)
   maestrodev/wget (>= 0)
   mjhas/clamav (>= 0)
+  mthibaut/users (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/gcc (>= 0)
   puppetlabs/git (>= 0)
