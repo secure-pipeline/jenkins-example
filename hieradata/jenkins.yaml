@@ -12,7 +12,6 @@ jenkins::plugin_hash:
   'greenballs': {}
   'build-flow-plugin': {}
   'metadata': {}
-  'brakeman': {}
   'batch-task': {}
   'blame-upstream-commiters': {}
   'clone-workspace-scm': {}
@@ -20,6 +19,9 @@ jenkins::plugin_hash:
   'git': {}
   'test-stability': {}
   'buildgraph-view': {}
+  'dashboard-view': {}
+  'analysis-core': {}
+  'brakeman': {}
   'sloccount': {}
 jenkins_job_builder::url: 'http://localhost:9090/'
 jenkins_job_builder::config_source: 'puppet:///modules/jenkins_jobs/config'
