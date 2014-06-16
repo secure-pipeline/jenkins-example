@@ -32,7 +32,7 @@
           gemrat ci_reporter
           bundle install --path ../cache/vendor
           bundle exec rake db:setup
-          bundle exec rake -f /var/lib/jenkins/jobs/download-and-test/cache/vendor/ruby/2.0.0/gems/ci_reporter-1.9.2/stub.rake ci:setup:rspecdoc spec
+          bundle exec rake -f ../cache/vendor/ruby/2.0.0/gems/ci_reporter-1.9.2/stub.rake ci:setup:rspecdoc spec
 
     scm:
       - workspace:
