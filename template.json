@@ -2,7 +2,7 @@
   "builders": [{
     "type": "digitalocean",
     "image": "ubuntu-14-04-x64",
-    "region": "ams1",
+    "region": "sfo1",
     "size": "1GB",
     "snapshot_name": "secure-pipeline-{{timestamp}}",
     "droplet_name": "jenkins.local"
